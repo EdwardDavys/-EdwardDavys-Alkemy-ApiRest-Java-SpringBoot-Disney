@@ -1,6 +1,8 @@
 package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 
 import java.time.LocalDate;
@@ -17,6 +19,9 @@ public class Serie {
 
     private String imagen;
     private String titulo;
+    @Column(name = "fecha_creacion")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaCreacion;
     private int calificacion;
 
@@ -34,7 +39,8 @@ public class Serie {
     public Serie() {
     }
 
-    public Serie(String imagen, String titulo, LocalDate fechaCreacion, int calificacion, List<Personaje> personajes, Genero genero) {
+    public Serie(Long id, String imagen, String titulo, LocalDate fechaCreacion, int calificacion, List<Personaje> personajes, Genero genero) {
+        this.id = id;
         this.imagen = imagen;
         this.titulo = titulo;
         this.fechaCreacion = fechaCreacion;
@@ -97,13 +103,5 @@ public class Serie {
 
     public void setGenero(Genero genero) {
         this.genero = genero;
-    }
-
-    public void agregarPersonaje(Personaje personaje){
-        personajes.add(personaje);
-    }
-
-    public void eliminarPersonaje(Personaje personaje){
-        personajes.remove(personaje);
     }
 }

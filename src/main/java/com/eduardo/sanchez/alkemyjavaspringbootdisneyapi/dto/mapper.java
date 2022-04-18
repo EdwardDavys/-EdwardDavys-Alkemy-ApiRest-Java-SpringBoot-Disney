@@ -19,7 +19,7 @@ public class mapper {
         serieResponseDto.setId(serie.getId());
         serieResponseDto.setImagen(serie.getImagen());
         serieResponseDto.setTitulo(serie.getTitulo());
-        serieResponseDto.setFechaCreacion(LocalDate.now());
+        serieResponseDto.setFechaCreacion(serie.getFechaCreacion());
         serieResponseDto.setCalificacion(serie.getCalificacion());
         serieResponseDto.setNombreGenero(serie.getGenero().getNombre());
         List<String> nombres= new ArrayList<>();
@@ -57,7 +57,7 @@ public class mapper {
             return personajeResponseDto;
     }
 
-    public static List<PersonajeResponseDto> seriesParaResponseDtos (List<Personaje> personajes){
+    public static List<PersonajeResponseDto> personajesParaResponseDtos (List<Personaje> personajes){
         List<PersonajeResponseDto> personajeResponseDtos = new ArrayList<>();
         for (Personaje personaje: personajes){
             personajeResponseDtos.add(personajeResponseDto(personaje));
@@ -78,7 +78,7 @@ public class mapper {
         return generoResponseDto;
     }
 
-    public static List<GeneroResponseDto>generoParaResponseDtos (List<Genero> generos){
+    public static List<GeneroResponseDto>generosParaResponseDtos (List<Genero> generos){
         List<GeneroResponseDto> generoResponseDtos=new ArrayList<>();
         for (Genero genero:generos){
             generoResponseDtos.add(generoParaGeneroResponseDto(genero));
