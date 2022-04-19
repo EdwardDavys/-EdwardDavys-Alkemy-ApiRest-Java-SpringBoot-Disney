@@ -5,12 +5,15 @@ import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieRe
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Serie;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface SerieService {
 
     public SerieResponseDto addSerie(SerieRequestDto serieRequestDto);
     public SerieResponseDto getSerieById(Long serieId);
     public Serie getSerie (Long serieId);
+    public List<SerieResponseDto> getSeries();
     public SerieResponseDto deleteSerie(Long serieId);
     public SerieResponseDto editSerie(Long serieId, SerieRequestDto serieRequestDto);
     public SerieResponseDto addPersonajeToSerie(Long serieId, Long personajeId);

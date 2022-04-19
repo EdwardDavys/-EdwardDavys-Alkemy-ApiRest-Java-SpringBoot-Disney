@@ -8,9 +8,13 @@ import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Personaje;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Serie;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.repository.SerieRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 @Service
@@ -26,7 +30,7 @@ public class SerieServiceImpl implements SerieService{
         this.generoService = generoService;
     }
 
-
+    @Transactional
     @Override
     public SerieResponseDto addSerie(SerieRequestDto serieRequestDto) {
         Serie serie = new Serie();
@@ -58,36 +62,97 @@ public class SerieServiceImpl implements SerieService{
 
     @Override
     public SerieResponseDto getSerieById(Long serieId) {
-        return null;
+        Serie serie = getSerie(serieId);
+        return mapper.serieParaSerieResponseDto(serie);
     }
 
     @Override
     public Serie getSerie(Long serieId) {
-        return null;
+
+        Serie serie = serieRepository.findById(serieId).orElseThrow(()->
+                        new IllegalArgumentException("no se encuentra serie con Id: " + serieId));
+
+
+        return serie;
+    }
+
+    @Override
+    public List<SerieResponseDto> getSeries() {
+
+        List<Serie>series = StreamSupport
+                            .stream(serieRepository.findAll().spliterator(),false)
+                            .collect(Collectors.toList());
+        return mapper.seriesParaSerieResponseDtos(series);
     }
 
     @Override
     public SerieResponseDto deleteSerie(Long serieId) {
-        return null;
+
+        Serie serie=getSerie(serieId);
+        serieRepository.delete(serie);
+        return mapper.serieParaSerieResponseDto(serie);
     }
 
     @Override
     public SerieResponseDto editSerie(Long serieId, SerieRequestDto serieRequestDto) {
-        return null;
+
+        Serie serieParaEditar=getSerie(serieId);
+        serieParaEditar.setImagen(serieRequestDto.getImagen());
+        serieParaEditar.setTitulo(serieRequestDto.getTitulo());
+        serieParaEditar.setFechaCreacion(serieRequestDto.getFechaCreacion());
+        if (!serieRequestDto.getPersonajeIds().isEmpty()){
+            List<Personaje>personajes= new ArrayList<>();
+            for (Long personajeId: serieRequestDto.getPersonajeIds()){
+                Personaje personaje = personajeService.getPersonaje(personajeId);
+                personajes.add(personaje);
+            }
+            serieParaEditar.setPersonajes(personajes);
+        }
+        if (serieRequestDto.getGeneroId()!=null){
+            Genero genero = generoService.getGenero(serieRequestDto.getGeneroId());
+            serieParaEditar.setGenero(genero);
+        }
+
+
+        return mapper.serieParaSerieResponseDto(serieParaEditar);
     }
 
     @Override
     public SerieResponseDto addPersonajeToSerie(Long serieId, Long personajeId) {
-        return null;
+
+        Serie serie = getSerie(serieId);
+        Personaje personaje = personajeService.getPersonaje(personajeId);
+        if (personaje.getSeries().contains(personaje)){
+            throw new IllegalArgumentException("El personaje ya esta asignado a la serie");
+        }
+        serie.addPersonaje(personaje);
+        personaje.addSerie(serie);
+        return mapper.serieParaSerieResponseDto(serie);
     }
 
     @Override
     public SerieResponseDto deletePersonajeFromSerie(Long serieId, Long personajeId) {
-        return null;
+        Serie   serie = getSerie(serieId);
+        Personaje personaje = personajeService.getPersonaje(personajeId);
+        if (!personaje.getSeries().contains(serie)){
+            throw new IllegalArgumentException("La serie no contiene este  personaje");
+        }
+        personaje.removeSerie(serie);
+        serie.deletePersonaje(personaje);
+
+        return mapper.serieParaSerieResponseDto(serie);
     }
 
     @Override
     public SerieResponseDto addGeneroToSerie(Long serieId, Long generoId) {
-        return null;
+        Serie serie = getSerie(serieId);
+        Genero genero = generoService.getGenero(generoId);
+        if (Objects.nonNull(serie.getGenero())){
+            throw new IllegalArgumentException("La serie ya tiene genero");
+        }
+        serie.setGenero(genero);
+        genero.addSerie(serie);
+
+        return mapper.serieParaSerieResponseDto(serie);
     }
 }

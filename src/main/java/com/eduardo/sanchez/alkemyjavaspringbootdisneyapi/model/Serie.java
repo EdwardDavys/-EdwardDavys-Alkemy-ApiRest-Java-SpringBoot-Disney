@@ -104,4 +104,12 @@ public class Serie {
     public void setGenero(Genero genero) {
         this.genero = genero;
     }
+
+    public void addPersonaje(Personaje personaje){
+        personajes.add(personaje);
+    }
+
+    public void deletePersonaje(Personaje personaje){
+        personajes.remove(personaje);
+    }
 }

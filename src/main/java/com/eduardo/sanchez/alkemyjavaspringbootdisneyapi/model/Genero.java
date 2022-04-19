@@ -57,4 +57,8 @@ public class Genero {
     public void setSeries(List<Serie> series) {
         this.series = series;
     }
+
+    public void addSerie(Serie serie){
+        series.add(serie);
+    }
 }

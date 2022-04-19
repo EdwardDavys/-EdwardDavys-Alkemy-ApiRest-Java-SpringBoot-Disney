@@ -90,4 +90,12 @@ public class Personaje {
     public void setSeries(List<Serie> series) {
         this.series = series;
     }
+
+    public void addSerie(Serie serie){
+        series.add(serie);
+    }
+
+    public void removeSerie(Serie serie){
+        series.remove(serie);
+    }
 }
