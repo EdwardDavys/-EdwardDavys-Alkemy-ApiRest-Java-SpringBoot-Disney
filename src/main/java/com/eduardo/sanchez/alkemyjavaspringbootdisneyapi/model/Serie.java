@@ -5,8 +5,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class Serie {
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate fechaCreacion;
+    private Date fechaCreacion;
     private int calificacion;
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -39,7 +40,7 @@ public class Serie {
     public Serie() {
     }
 
-    public Serie(Long id, String imagen, String titulo, LocalDate fechaCreacion, int calificacion, List<Personaje> personajes, Genero genero) {
+    public Serie(Long id, String imagen, String titulo, Date fechaCreacion, int calificacion, List<Personaje> personajes, Genero genero) {
         this.id = id;
         this.imagen = imagen;
         this.titulo = titulo;
@@ -73,11 +74,11 @@ public class Serie {
         this.titulo = titulo;
     }
 
-    public LocalDate getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(LocalDate fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 

@@ -20,7 +20,7 @@ public class Personaje {
     private int peso;
     private String historia;
 
-    @ManyToMany(mappedBy = "Genero",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "genero",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Serie> series= new ArrayList<>();
 
     public Personaje() {

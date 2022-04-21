@@ -7,7 +7,7 @@ import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Genero;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Personaje;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Serie;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 

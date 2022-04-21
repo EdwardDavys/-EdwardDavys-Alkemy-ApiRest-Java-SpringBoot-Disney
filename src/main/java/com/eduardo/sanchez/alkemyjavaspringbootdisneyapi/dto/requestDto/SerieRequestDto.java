@@ -1,14 +1,15 @@
 package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.requestDto;
 
 
-import java.time.LocalDate;
+
+import java.util.Date;
 import java.util.List;
 
 public class SerieRequestDto {
 
     private String imagen;
     private String titulo;
-    private LocalDate fechaCreacion;
+    private Date fechaCreacion;
     private int calificacion;
     private List<Long> personajeIds;
     private Long generoId;
@@ -16,7 +17,7 @@ public class SerieRequestDto {
     public SerieRequestDto() {
     }
 
-    public SerieRequestDto(String imagen, String titulo, LocalDate fechaCreacion, int calificacion, List<Long> personajeIds, Long generoId) {
+    public SerieRequestDto(String imagen, String titulo, Date fechaCreacion, int calificacion, List<Long> personajeIds, Long generoId) {
         this.imagen = imagen;
         this.titulo = titulo;
         this.fechaCreacion = fechaCreacion;
@@ -41,11 +42,11 @@ public class SerieRequestDto {
         this.titulo = titulo;
     }
 
-    public LocalDate getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(LocalDate fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 

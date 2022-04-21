@@ -39,7 +39,7 @@ public class SerieServiceImpl implements SerieService{
         serie.setFechaCreacion(serieRequestDto.getFechaCreacion());
         serie.setCalificacion(serieRequestDto.getCalificacion());
         if (serieRequestDto.getPersonajeIds().isEmpty()){
-            throw new IllegalArgumentException("La serie Nesecita  un ersonaje");
+            throw new IllegalArgumentException("La serie necesita  un personaje");
         }else{
             List<Personaje> personajes = new ArrayList<>();
             for (Long personajeId: serieRequestDto.getPersonajeIds()){
@@ -49,7 +49,7 @@ public class SerieServiceImpl implements SerieService{
             serie.setPersonajes(personajes);
         }
         if (serieRequestDto.getGeneroId()==null){
-            throw new IllegalArgumentException("La Serie nesecita un genero");
+            throw new IllegalArgumentException("La Serie necesita un genero");
         }
         Genero genero = generoService.getGenero(serieRequestDto.getGeneroId());
         serie.setGenero(genero);

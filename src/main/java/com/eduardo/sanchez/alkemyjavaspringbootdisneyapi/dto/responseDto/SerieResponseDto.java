@@ -1,6 +1,7 @@
 package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto;
 
-import java.time.LocalDate;
+
+import java.util.Date;
 import java.util.List;
 
 public class SerieResponseDto {
@@ -8,7 +9,7 @@ public class SerieResponseDto {
     private Long id;
     private String imagen;
     private String titulo;
-    private LocalDate fechaCreacion;
+    private Date fechaCreacion;
     private int calificacion;
     private List<String> nombrePersonaje;
     private String nombreGenero;
@@ -17,7 +18,7 @@ public class SerieResponseDto {
     public SerieResponseDto() {
     }
 
-    public SerieResponseDto(Long id, String imagen, String titulo, LocalDate fechaCreacion, int calificacion, List<String> nombrePersonaje, String nombreGenero) {
+    public SerieResponseDto(Long id, String imagen, String titulo, Date fechaCreacion, int calificacion, List<String> nombrePersonaje, String nombreGenero) {
         this.id = id;
         this.imagen = imagen;
         this.titulo = titulo;
@@ -51,11 +52,11 @@ public class SerieResponseDto {
         this.titulo = titulo;
     }
 
-    public LocalDate getFechaCreacion() {
+    public Date getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(LocalDate fechaCreacion) {
+    public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
