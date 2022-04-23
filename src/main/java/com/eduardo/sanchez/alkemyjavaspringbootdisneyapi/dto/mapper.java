@@ -53,7 +53,7 @@ public class mapper {
             for (Serie serie: series){
                 nombres.add(serie.getTitulo());
             }
-            personajeResponseDto.setSeriesName(nombres);
+            personajeResponseDto.setNombreSerie(nombres);
             return personajeResponseDto;
     }
 

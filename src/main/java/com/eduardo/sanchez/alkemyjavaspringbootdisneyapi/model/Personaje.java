@@ -2,7 +2,6 @@ package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model;
 
 import javax.persistence.*;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +19,16 @@ public class Personaje {
     private int peso;
     private String historia;
 
-    @ManyToMany(mappedBy = "genero",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Serie.class,cascade = CascadeType.ALL)
+    @JoinTable(name="serie_personaje",
+           joinColumns = @JoinColumn(name="personaje_id"),
+            inverseJoinColumns = @JoinColumn(name="serie_id"))
     private List<Serie> series= new ArrayList<>();
 
     public Personaje() {
     }
-
-    public Personaje(String imagen, String nombre, int edad, int peso, String historia, List<Serie> series) {
+    public Personaje(Long id, String imagen, String nombre, int edad, int peso, String historia, List<Serie> series) {
+        this.id = id;
         this.imagen = imagen;
         this.nombre = nombre;
         this.edad = edad;
@@ -38,63 +40,48 @@ public class Personaje {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getImagen() {
         return imagen;
     }
-
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
     public int getEdad() {
         return edad;
     }
-
     public void setEdad(int edad) {
         this.edad = edad;
     }
-
     public int getPeso() {
         return peso;
     }
-
     public void setPeso(int peso) {
         this.peso = peso;
     }
-
     public String getHistoria() {
         return historia;
     }
-
     public void setHistoria(String historia) {
         this.historia = historia;
     }
-
     public List<Serie> getSeries() {
         return series;
     }
-
     public void setSeries(List<Serie> series) {
         this.series = series;
     }
-
     public void addSerie(Serie serie){
         series.add(serie);
     }
-
     public void removeSerie(Serie serie){
         series.remove(serie);
     }

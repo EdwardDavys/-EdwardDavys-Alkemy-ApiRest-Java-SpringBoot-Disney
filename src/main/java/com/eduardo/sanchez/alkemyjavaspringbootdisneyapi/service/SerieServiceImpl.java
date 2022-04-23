@@ -93,6 +93,7 @@ public class SerieServiceImpl implements SerieService{
         return mapper.serieParaSerieResponseDto(serie);
     }
 
+    @Transactional
     @Override
     public SerieResponseDto editSerie(Long serieId, SerieRequestDto serieRequestDto) {
 
@@ -100,6 +101,7 @@ public class SerieServiceImpl implements SerieService{
         serieParaEditar.setImagen(serieRequestDto.getImagen());
         serieParaEditar.setTitulo(serieRequestDto.getTitulo());
         serieParaEditar.setFechaCreacion(serieRequestDto.getFechaCreacion());
+        serieParaEditar.setCalificacion(serieRequestDto.getCalificacion());
         if (!serieRequestDto.getPersonajeIds().isEmpty()){
             List<Personaje>personajes= new ArrayList<>();
             for (Long personajeId: serieRequestDto.getPersonajeIds()){

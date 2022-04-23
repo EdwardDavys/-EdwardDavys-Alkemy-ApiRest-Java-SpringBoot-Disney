@@ -22,6 +22,7 @@ public class PersonajeServiceImpl implements PersonajeService{
         this.personajeRepository = personajeRepository;
     }
 
+    @Transactional
     @Override
     public PersonajeResponseDto addPersonaje(PersonajeRequestDto personajeRequestDto) {
         Personaje personaje = new Personaje();
@@ -30,6 +31,8 @@ public class PersonajeServiceImpl implements PersonajeService{
         personaje.setEdad(personajeRequestDto.getEdad());
         personaje.setPeso(personajeRequestDto.getPeso());
         personaje.setHistoria(personajeRequestDto.getHistoria());
+
+        personajeRepository.save(personaje);
 
         return mapper.personajeResponseDto(personaje);
     }

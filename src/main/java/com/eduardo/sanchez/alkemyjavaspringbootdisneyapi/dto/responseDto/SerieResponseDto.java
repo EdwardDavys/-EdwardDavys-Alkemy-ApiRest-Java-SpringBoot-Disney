@@ -19,7 +19,7 @@ public class SerieResponseDto {
     }
 
     public SerieResponseDto(Long id, String imagen, String titulo, Date fechaCreacion, int calificacion, List<String> nombrePersonaje, String nombreGenero) {
-        this.id = id;
+       this.id = id;
         this.imagen = imagen;
         this.titulo = titulo;
         this.fechaCreacion = fechaCreacion;
@@ -33,8 +33,8 @@ public class SerieResponseDto {
     }
 
     public void setId(Long id) {
-        this.id = id;
-    }
+       this.id = id;
+   }
 
     public String getImagen() {
         return imagen;
