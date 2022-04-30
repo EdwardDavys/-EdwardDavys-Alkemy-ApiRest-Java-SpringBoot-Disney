@@ -3,6 +3,7 @@ package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto;
 import java.util.List;
 
 public class PersonajeResponseDto {
+
     private Long id;
     private String imagen;
     private String nombre;
@@ -12,7 +13,9 @@ public class PersonajeResponseDto {
     private List<String> nombreSerie;
 
     public PersonajeResponseDto() {
+
     }
+
     public PersonajeResponseDto(Long id, String imagen, String nombre, int edad, int peso, String historia, List<String> nombreSerie) {
         this.id = id;
         this.imagen = imagen;
@@ -28,33 +31,42 @@ public class PersonajeResponseDto {
     public String getImagen() {
         return imagen;
     }
+
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    public String getNombre() {
-        return nombre;
-    }
+
+    public String getNombre() {return nombre;}
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public int getEdad() {
         return edad;
     }
+
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
     public int getPeso() {
         return peso;
     }
+
     public void setPeso(int peso) {
         this.peso = peso;
     }
+
     public String getHistoria() {
         return historia;
     }
+
     public void setHistoria(String historia) {
         this.historia = historia;
     }
+
     public List<String> getNombreSerie() {return nombreSerie;}
+
     public void setNombreSerie(List<String> nombreSerie) {this.nombreSerie = nombreSerie;}
 }

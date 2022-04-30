@@ -3,6 +3,7 @@ package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.controller;
 
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.requestDto.PersonajeRequestDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.PersonajeResponseDto;
+import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.PersonajeResponseFilterDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.service.PersonajeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,24 @@ public class PersonajeController {
         List<PersonajeResponseDto> personajeResponseDtos = personajeService.getPersonajes();
         return new ResponseEntity<>(personajeResponseDtos,HttpStatus.OK);
 
+    }
+
+    @GetMapping("/nombre/{name}")
+    public ResponseEntity<List<PersonajeResponseFilterDto>> getPersonajeByNombre(@PathVariable String name){
+        List<PersonajeResponseFilterDto> personajeResponseFilterDtos = personajeService.findByNombre(name);
+        return new ResponseEntity<>(personajeResponseFilterDtos, HttpStatus.OK);
+    }
+
+   /* @GetMapping("/serie/{idSerie}")
+    public ResponseEntity<List<PersonajeResponseFilterDto>> getPersonajeBySerieid(@PathVariable Long idSerie){
+        List<PersonajeResponseFilterDto> personajeResponseFilterDtos = personajeService.findBySeries(idSerie);
+        return new ResponseEntity<>(personajeResponseFilterDtos, HttpStatus.OK);
+    }*/
+
+    @GetMapping("/edad/{age}")
+    public ResponseEntity<List<PersonajeResponseFilterDto>> getPersonajeByEdad(@PathVariable int age){
+        List<PersonajeResponseFilterDto> personajeResponseFilterDtos = personajeService.findByEdad(age);
+        return new ResponseEntity<>(personajeResponseFilterDtos, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

@@ -1,8 +1,6 @@
 package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto;
 
-import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.GeneroResponseDto;
-import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.PersonajeResponseDto;
-import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieResponseDto;
+import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.*;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Genero;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Personaje;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Serie;
@@ -40,6 +38,24 @@ public class mapper {
           return serieResponseDtos;
     }
 
+    public static SerieResponseFilterDto serieResponseFilterDto(Serie serie){
+        SerieResponseFilterDto serieResponseFilterDto = new SerieResponseFilterDto();
+        serieResponseFilterDto.setId(serie.getId());
+        serieResponseFilterDto.setTitulo(serie.getTitulo());
+        serieResponseFilterDto.setImagen(serie.getImagen());
+        serieResponseFilterDto.setFechaCreacion(serie.getFechaCreacion());
+
+        return serieResponseFilterDto;
+    }
+
+    public static List<SerieResponseFilterDto> serieResponseFilterDtos(List<Serie>series){
+        List<SerieResponseFilterDto>serieResponseFilterDtos = new ArrayList<>();
+        for (Serie serie: series){
+            serieResponseFilterDtos.add(serieResponseFilterDto(serie));
+        }
+        return serieResponseFilterDtos;
+    }
+
     public static PersonajeResponseDto personajeResponseDto(Personaje personaje){
             PersonajeResponseDto personajeResponseDto = new PersonajeResponseDto();
             personajeResponseDto.setId(personaje.getId());
@@ -64,6 +80,29 @@ public class mapper {
         }
         return personajeResponseDtos;
     }
+
+    //Dto para mostrar datos filtrados
+    public static PersonajeResponseFilterDto personajeResponseFilterDto(Personaje personaje){
+        PersonajeResponseFilterDto personajeResponseFilterDto = new PersonajeResponseFilterDto();
+        personajeResponseFilterDto.setId(personaje.getId());
+        personajeResponseFilterDto.setImagen(personaje.getImagen());
+        personajeResponseFilterDto.setNombre(personaje.getNombre());
+
+        return personajeResponseFilterDto;
+
+    }
+    //Lista de dtos PersonajeResponseFilterDtos
+    public static List<PersonajeResponseFilterDto> personajeResponseFilterDtos(List<Personaje>personajes){
+        List<PersonajeResponseFilterDto> personajeResponseFilterDtos = new ArrayList<>();
+        for (Personaje personaje: personajes){
+            personajeResponseFilterDtos.add(personajeResponseFilterDto(personaje));
+        }
+        return personajeResponseFilterDtos;
+    }
+
+
+
+
 
     public static GeneroResponseDto generoParaGeneroResponseDto(Genero genero){
         GeneroResponseDto generoResponseDto = new GeneroResponseDto();

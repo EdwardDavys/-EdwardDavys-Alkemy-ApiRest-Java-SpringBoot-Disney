@@ -3,6 +3,7 @@ package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.controller;
 
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.requestDto.SerieRequestDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieResponseDto;
+import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieResponseFilterDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.service.SerieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,31 @@ public class SerieController {
         List<SerieResponseDto> serieResponseDtos = serieService.getSeries();
         return new ResponseEntity<>(serieResponseDtos,HttpStatus.OK);
     }
+
+    @GetMapping("/serie/{name}")
+    public ResponseEntity<List<SerieResponseFilterDto>> getSerieByNombre(@PathVariable String name){
+        List<SerieResponseFilterDto> serieResponseFilterDtos = serieService.getSerieBynombre(name);
+        return new ResponseEntity<>(serieResponseFilterDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/{idGenero}")
+    public ResponseEntity<List<SerieResponseFilterDto>> getSerieByIdGenero(@PathVariable Long idGenero){
+        List<SerieResponseFilterDto> serieResponseFilterDtos = serieService.getSerieByGenero(idGenero);
+        return new ResponseEntity<>(serieResponseFilterDtos,HttpStatus.OK);
+    }
+
+    @GetMapping("/ASC")
+    public ResponseEntity<List<SerieResponseFilterDto>> getSerieByFechaCreacionAsc(){
+        List<SerieResponseFilterDto>serieResponseFilterDtos = serieService.getOrderByFechaCreacionAsc();
+        return new ResponseEntity<>(serieResponseFilterDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/DESC")
+    public ResponseEntity<List<SerieResponseFilterDto>> getSerieByFechaCreacionDesc(){
+        List<SerieResponseFilterDto>serieResponseFilterDtos = serieService.getOrderByFechaCreacionDesc();
+        return new ResponseEntity<>(serieResponseFilterDtos, HttpStatus.OK);
+    }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<SerieResponseDto> deleteSerie(@PathVariable final Long id){

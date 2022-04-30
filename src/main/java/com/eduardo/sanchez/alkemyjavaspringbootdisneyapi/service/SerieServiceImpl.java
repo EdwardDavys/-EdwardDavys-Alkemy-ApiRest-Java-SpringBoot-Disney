@@ -3,6 +3,7 @@ package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.service;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.mapper;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.requestDto.SerieRequestDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieResponseDto;
+import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieResponseFilterDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Genero;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Personaje;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Serie;
@@ -83,6 +84,40 @@ public class SerieServiceImpl implements SerieService{
                             .stream(serieRepository.findAll().spliterator(),false)
                             .collect(Collectors.toList());
         return mapper.seriesParaSerieResponseDtos(series);
+    }
+
+    //METODO PARA OBTENER LAS SERIES POR NOMBRE
+    @Override
+    public List<SerieResponseFilterDto> getSerieBynombre(String titulo) {
+
+       List<Serie>series = StreamSupport
+                            .stream(serieRepository.findByTitulo(titulo).spliterator(),false)
+                            .collect(Collectors.toList());
+        return mapper.serieResponseFilterDtos(series);
+    }
+    //METODO PARA OBTENER LAS SERIES POR idGENERO
+    @Override
+    public List<SerieResponseFilterDto> getSerieByGenero(Long idGenero) {
+        List<Serie>series = StreamSupport
+                            .stream(generoService.getGenero(idGenero).getSeries().spliterator(),false)
+                .collect(Collectors.toList());
+        return mapper.serieResponseFilterDtos(series);
+    }
+
+    @Override
+    public List<SerieResponseFilterDto> getOrderByFechaCreacionAsc() {
+        List<Serie>series = StreamSupport
+                            .stream(serieRepository.OrderByFechaCreacionAsc().spliterator(),false)
+                            .collect(Collectors.toList());
+        return mapper.serieResponseFilterDtos(series);
+    }
+
+    @Override
+    public List<SerieResponseFilterDto> getOrderByFechaCreacionDesc() {
+        List<Serie>series = StreamSupport
+                .stream(serieRepository.OrderByFechaCreacionDesc().spliterator(),false)
+                .collect(Collectors.toList());
+        return mapper.serieResponseFilterDtos(series);
     }
 
     @Override

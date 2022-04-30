@@ -2,6 +2,7 @@ package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.service;
 
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.requestDto.SerieRequestDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieResponseDto;
+import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieResponseFilterDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model.Serie;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,10 @@ public interface SerieService {
     public SerieResponseDto getSerieById(Long serieId);
     public Serie getSerie (Long serieId);
     public List<SerieResponseDto> getSeries();
+    public List<SerieResponseFilterDto> getSerieBynombre(String titutlo);
+    public List<SerieResponseFilterDto> getSerieByGenero(Long idGenero);
+    public List<SerieResponseFilterDto> getOrderByFechaCreacionAsc();
+    public List<SerieResponseFilterDto> getOrderByFechaCreacionDesc();
     public SerieResponseDto deleteSerie(Long serieId);
     public SerieResponseDto editSerie(Long serieId, SerieRequestDto serieRequestDto);
     public SerieResponseDto addPersonajeToSerie(Long serieId, Long personajeId);
