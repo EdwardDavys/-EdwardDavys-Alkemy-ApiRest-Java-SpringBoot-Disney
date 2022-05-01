@@ -26,15 +26,16 @@ public class Serie {
     private Date fechaCreacion;
     private int calificacion;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "serie_personaje",
             joinColumns = @JoinColumn (name = "serie_id"),
             inverseJoinColumns = @JoinColumn(name = "personaje_id")
     )
     private List<Personaje> personajes=new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "genero_id")
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "genero_id",referencedColumnName = "id")
     private Genero genero;
 
     public Serie() {

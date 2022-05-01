@@ -5,6 +5,7 @@ import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.requestDto.Personaj
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.PersonajeResponseDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.PersonajeResponseFilterDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.service.PersonajeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class PersonajeController {
 
     private  final PersonajeService personajeService;
 
+    @Autowired
     public PersonajeController(PersonajeService personajeService) {
         this.personajeService = personajeService;
     }

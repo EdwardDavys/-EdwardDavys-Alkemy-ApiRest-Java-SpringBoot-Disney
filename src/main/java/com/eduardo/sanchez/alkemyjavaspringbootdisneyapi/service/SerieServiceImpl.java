@@ -67,6 +67,7 @@ public class SerieServiceImpl implements SerieService{
         return mapper.serieParaSerieResponseDto(serie);
     }
 
+    @Transactional
     @Override
     public Serie getSerie(Long serieId) {
 
@@ -120,11 +121,13 @@ public class SerieServiceImpl implements SerieService{
         return mapper.serieResponseFilterDtos(series);
     }
 
+    @Transactional
     @Override
     public SerieResponseDto deleteSerie(Long serieId) {
 
         Serie serie=getSerie(serieId);
         serieRepository.delete(serie);
+
         return mapper.serieParaSerieResponseDto(serie);
     }
 

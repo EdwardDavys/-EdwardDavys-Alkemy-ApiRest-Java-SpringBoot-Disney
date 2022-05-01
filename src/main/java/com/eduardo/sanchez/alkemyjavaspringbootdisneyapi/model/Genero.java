@@ -1,6 +1,10 @@
 package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model;
 
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +18,10 @@ public class Genero {
     private Long id;
     private String nombre;
     private String imagen;
-    @OneToMany(mappedBy = "genero",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Serie>series=new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "genero")
+    private List<Serie> series = new ArrayList<>();
 
     public Genero() {
     }

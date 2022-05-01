@@ -4,6 +4,7 @@ package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.controller;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.requestDto.GeneroRequestDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.GeneroResponseDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.service.GeneroService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class GeneroController {
 
     private final GeneroService generoService;
 
+    @Autowired
     public GeneroController(GeneroService generoService) {
         this.generoService = generoService;
     }

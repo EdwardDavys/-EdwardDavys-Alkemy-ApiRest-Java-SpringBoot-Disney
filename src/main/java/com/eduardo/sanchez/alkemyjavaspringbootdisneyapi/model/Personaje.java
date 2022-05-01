@@ -1,5 +1,7 @@
 package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -19,10 +21,8 @@ public class Personaje {
     private int peso;
     private String historia;
 
-    @OneToMany(targetEntity = Serie.class,cascade = CascadeType.ALL)
-    @JoinTable(name="serie_personaje",
-           joinColumns = @JoinColumn(name="personaje_id"),
-            inverseJoinColumns = @JoinColumn(name="serie_id"))
+    @JsonIgnore
+    @ManyToMany(mappedBy = "personajes")
     private List<Serie> series= new ArrayList<>();
 
     public Personaje() {

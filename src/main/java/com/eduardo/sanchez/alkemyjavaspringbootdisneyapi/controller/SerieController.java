@@ -5,6 +5,7 @@ import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.requestDto.SerieReq
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieResponseDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.dto.responseDto.SerieResponseFilterDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.service.SerieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class SerieController {
 
     private final SerieService serieService;
 
+    @Autowired
     public SerieController(SerieService serieService) {
         this.serieService = serieService;
     }
