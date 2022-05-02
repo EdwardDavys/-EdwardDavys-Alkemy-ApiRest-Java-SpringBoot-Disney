@@ -54,7 +54,7 @@ public class AuthController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         if (usuarioService.existByNombreUsuario(nuevoUsuario.getNombreUsuario()))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        if (usuarioService.existByEmail(nuevoUsuario.getEmail()))
+        if (usuarioService.existsByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         Usuario usuario =
         new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
