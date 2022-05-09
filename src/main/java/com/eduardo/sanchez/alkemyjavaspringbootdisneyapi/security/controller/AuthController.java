@@ -18,7 +18,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,8 +78,7 @@ public class AuthController {
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(),loginUsuario.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jtw = jwtProvider.generateToken(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        JwtDto jwtDto = new JwtDto(jtw,userDetails.getUsername(),userDetails.getAuthorities());
+        JwtDto jwtDto = new JwtDto(jtw);
         return new ResponseEntity(jwtDto,HttpStatus.OK);
     }
 }
