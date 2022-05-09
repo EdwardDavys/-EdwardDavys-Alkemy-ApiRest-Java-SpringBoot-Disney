@@ -1,6 +1,6 @@
 package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.security.dto;
 
-import javax.validation.constraints.Email;
+
 import javax.validation.constraints.NotBlank;
 
 public class LoginUsuario {

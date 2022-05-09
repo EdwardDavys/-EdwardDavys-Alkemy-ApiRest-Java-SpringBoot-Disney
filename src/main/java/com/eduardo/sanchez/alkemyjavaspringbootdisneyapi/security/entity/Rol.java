@@ -2,9 +2,10 @@ package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.security.entity;
 
 
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.security.enums.RolNombre;
-import com.sun.istack.NotNull;
+
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Rol {
@@ -19,7 +20,7 @@ public class Rol {
     public Rol() {
     }
 
-    public Rol(RolNombre rolNombre) {
+    public Rol(@NotNull RolNombre rolNombre) {
         this.rolNombre = rolNombre;
     }
 
