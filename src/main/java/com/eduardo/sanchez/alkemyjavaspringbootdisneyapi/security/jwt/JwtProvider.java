@@ -1,7 +1,11 @@
 package com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.security.jwt;
 
 
+import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.security.dto.JwtDto;
 import com.eduardo.sanchez.alkemyjavaspringbootdisneyapi.security.entity.UsuarioPrincipal;
+import com.nimbusds.jwt.JWT;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.JWTParser;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +40,7 @@ public class JwtProvider {
                 .setSubject(usuarioPrincipal.getUsername())
                 .claim("roles",roles)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + expiration * 100))
+                .setExpiration(new Date(new Date().getTime() + expiration))
                 .signWith(SignatureAlgorithm.HS512,secret.getBytes())
                 .compact();
     }
@@ -62,5 +67,22 @@ public class JwtProvider {
         }
 
         return false;
+    }
+
+    public String refreshToken(JwtDto jwtDto) throws ParseException {
+
+        JWT jwt = JWTParser.parse(jwtDto.getToken());
+        JWTClaimsSet claims = jwt.getJWTClaimsSet();
+        String nombreUsuario = claims.getSubject();
+        List<String> roles = (List<String>)claims.getClaim("roles");
+
+
+        return Jwts.builder()
+                .setSubject(nombreUsuario)
+                .claim("roles",roles)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(new Date().getTime() + expiration))
+                .signWith(SignatureAlgorithm.HS512,secret.getBytes())
+                .compact();
     }
 }
